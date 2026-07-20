@@ -1,0 +1,9 @@
+services:
+  timeseries:
+    image: timeseries
+    build:
+      context: .
+      dockerfile: src/TimeSeries/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"

@@ -1,0 +1,22 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries", "TimeSeries.csproj", "{EFFD90DA-FD8F-4F15-AC97-D5EA6FA7BA2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries.Domain", "..\TimeSeries.Domain\TimeSeries.Domain.csproj", "{0313CDF6-A109-48EC-BDE6-A787CFF86639}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EFFD90DA-FD8F-4F15-AC97-D5EA6FA7BA2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFFD90DA-FD8F-4F15-AC97-D5EA6FA7BA2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFFD90DA-FD8F-4F15-AC97-D5EA6FA7BA2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFFD90DA-FD8F-4F15-AC97-D5EA6FA7BA2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0313CDF6-A109-48EC-BDE6-A787CFF86639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0313CDF6-A109-48EC-BDE6-A787CFF86639}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0313CDF6-A109-48EC-BDE6-A787CFF86639}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0313CDF6-A109-48EC-BDE6-A787CFF86639}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
