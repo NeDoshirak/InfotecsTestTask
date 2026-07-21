@@ -1,4 +1,5 @@
 using Microsoft.OpenApi;
+using TimeSeries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddSwaggerGen(options =>
         Description = "API для работы с временными рядами"
     });
 });
+
+builder.Services.ConfigureTimeSeries(builder.Configuration);
 
 var app = builder.Build();
 
