@@ -1,3 +1,4 @@
+using TimeSeries.Features.Files;
 using TimeSeries.Infrastructure;
 
 namespace TimeSeries;
@@ -9,6 +10,14 @@ public static class ServiceCollectionExtensions
         IConfiguration configuration)
     {
         services.AddTimeSeriesDatabase(configuration);
+        
+        services.AddMediatR(mediatrServiceConfiguration =>
+        {
+            mediatrServiceConfiguration.RegisterServicesFromAssemblyContaining<Program>();
+        });
+
+        services.AddScoped<ICsvFileProcessor, CsvFileProcessor>();
+        
         return services;
     }
 }

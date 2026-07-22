@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TimeSeries.Infrastructure;
@@ -11,9 +12,11 @@ using TimeSeries.Infrastructure;
 namespace TimeSeries.Infrastructure.Migrations
 {
     [DbContext(typeof(TimeSeriesDbContext))]
-    partial class TimeSeriesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260722143903_CreateTimeSeriesTables")]
+    partial class CreateTimeSeriesTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

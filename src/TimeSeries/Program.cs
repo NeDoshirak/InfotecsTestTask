@@ -1,5 +1,6 @@
 using Microsoft.OpenApi;
 using TimeSeries;
+using TimeSeries.Application.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +27,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+if (!builder.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseAuthorization();
 
