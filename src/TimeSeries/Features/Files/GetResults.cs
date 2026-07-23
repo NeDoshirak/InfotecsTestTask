@@ -167,8 +167,7 @@ public sealed class GetResultsCommandHandler(
             JsonSerializer.Serialize(response),
             new DistributedCacheEntryOptions
             {
-                AbsoluteExpirationRelativeToNow =
-                    TimeSpan.FromSeconds(30)
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30)
             },
             cancellationToken);
 
