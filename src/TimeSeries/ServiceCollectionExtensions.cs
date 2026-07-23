@@ -10,6 +10,16 @@ public static class ServiceCollectionExtensions
         IConfiguration configuration)
     {
         services.AddTimeSeriesDatabase(configuration);
+
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration =
+                configuration.GetConnectionString("Valkey")
+                ?? throw new InvalidOperationException(
+                    "Connection string 'Valkey' not found.");
+
+            options.InstanceName = "timeseries:";
+        });
         
         services.AddMediatR(mediatrServiceConfiguration =>
         {
