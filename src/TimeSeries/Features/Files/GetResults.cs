@@ -10,7 +10,7 @@ namespace TimeSeries.Features.Files;
 
 [ApiController]
 [Route("files")]
-public class GetResults(ISender sender) : ApiControllerBase
+public class GetResults(ISender sender, CancellationToken cancellationToken) : ApiControllerBase
 {
     [HttpGet("results")]
     public async Task<IActionResult> GetResult(
@@ -50,7 +50,7 @@ public class GetResults(ISender sender) : ApiControllerBase
             averageExecutionTimeFrom, 
             averageExecutionTimeTo, 
             offset, 
-            limit));
+            limit), cancellationToken);
         
         return Ok(result);
     }

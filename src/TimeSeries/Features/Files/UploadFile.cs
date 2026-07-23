@@ -13,13 +13,12 @@ namespace TimeSeries.Features.Files;
 
 [ApiController]
 [Route("files")]
-public class UploadFile(ISender sender)  : ApiControllerBase
+public class UploadFile(ISender sender, CancellationToken cancellationToken)  : ApiControllerBase
 {
     [HttpPost("upload")]
     public async Task<IActionResult> Upload(
         IFormFile file,
-        [FromHeader(Name = "Idempotency-Key")] string? idempotencyKey,
-        CancellationToken cancellationToken)
+        [FromHeader(Name = "Idempotency-Key")] string? idempotencyKey)
     {
         if (file is null || file.Length == 0) 
         {
