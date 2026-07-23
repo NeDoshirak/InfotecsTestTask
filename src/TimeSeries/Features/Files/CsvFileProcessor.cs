@@ -29,15 +29,24 @@ public class CsvFileProcessor : ICsvFileProcessor
         {
             сurrentLineNumber++;
 
-            if (сurrentLineNumber > 10000)
+            if (processedCsvRows.Count >= 10_000)
             {
                 throw new CsvValidationException(
-                    reason: "Число строк в CSV не можеть быть больше 10000.");
+                    reason: "Некорректное количество строк",
+                    details: "CSV-файл не может содержать больше 10000 строк данных.",
+                    lineNumber: сurrentLineNumber);
             }
             
             var row = ParseRow(line, сurrentLineNumber);
             
             processedCsvRows.Add(row);
+        }
+
+        if (processedCsvRows.Count == 0)
+        {
+            throw new CsvValidationException(
+                reason: "Файл не содержит строк данных",
+                details: "CSV-файл должен содержать от 1 до 10000 строк данных.");
         }
         
         var statistic = CalculateStatistics(processedCsvRows);
@@ -54,7 +63,7 @@ public class CsvFileProcessor : ICsvFileProcessor
                 lineNumber: lineNumber);
         }
         
-        var columns = line.Split(',');
+        var columns = line.Split(';');
 
         if (columns.Length != 3)
         {

@@ -54,7 +54,10 @@ public sealed class UploadFileCommandHandler(ICsvFileProcessor processor, TimeSe
         var idempotencyKeyGuid = request.IdempotencyKeyGuid; 
         var contentHash = await CalculateHashAsync(request.File, cancellationToken);
         
-        bool isExist = dbContext.UploadedFiles.Any(x => x.IdempotencyKey == idempotencyKeyGuid);
+        var isExist = await dbContext.UploadedFiles
+            .AnyAsync(
+                x => x.IdempotencyKey == idempotencyKeyGuid,
+                cancellationToken);
 
         if (isExist)
         {
@@ -85,10 +88,14 @@ public sealed class UploadFileCommandHandler(ICsvFileProcessor processor, TimeSe
         try
         {
             if (await dbContext.UploadedFiles
-                    .AnyAsync(x => x.FileName == normalizedFileName, cancellationToken: cancellationToken))
+                    .AnyAsync(
+                        x => x.NormalizedFileName == normalizedFileName,
+                        cancellationToken))
             { 
                 dbContext.UploadedFiles.Remove(await dbContext.UploadedFiles
-                    .FirstAsync(x => x.FileName == normalizedFileName, cancellationToken));
+                    .FirstAsync(
+                        x => x.NormalizedFileName == normalizedFileName,
+                        cancellationToken));
             }
 
             await dbContext.UploadedFiles.AddAsync(new UploadedFile
@@ -126,7 +133,8 @@ public sealed class UploadFileCommandHandler(ICsvFileProcessor processor, TimeSe
         }
         catch (DbUpdateException ex)
             when (ex.InnerException is PostgresException postgresException &&
-                  postgresException.SqlState == PostgresErrorCodes.UniqueViolation)
+                  postgresException.SqlState == PostgresErrorCodes.UniqueViolation &&
+                  postgresException.ConstraintName == "IX_UploadedFiles_IdempotencyKey")
         {
             await transaction.RollbackAsync(cancellationToken);
             
