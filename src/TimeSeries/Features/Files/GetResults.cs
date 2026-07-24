@@ -86,24 +86,13 @@ public sealed class GetResultsCommandHandler(
             return JsonSerializer.Deserialize<PagedResponse>(cachedResult)!;
         }
         
-        var query = dbContext.ProcessingResults
-            .AsNoTracking()
-            .Select(x => new ResultDto(
-                FileName: x.UploadedFile.FileName,
-                DateDeltaSeconds: x.DateDeltaSeconds,
-                FirstOperationDate: x.FirstOperationDate,
-                AverageExecutionTime: x.AverageExecutionTime,
-                AverageValue: x.AverageValue,
-                MedianValue: x.MedianValue,
-                MaxValue: x.MaxValue,
-                MinValue: x.MinValue
-                ));
+        var query = dbContext.ProcessingResults.AsNoTracking();
         
         if (!string.IsNullOrWhiteSpace(request.FileName))
         {
             query = query.Where(x =>
                 EF.Functions.ILike(
-                    x.FileName,
+                    x.UploadedFile.FileName,
                     $"%{request.FileName.Trim()}%"));
         }
         
@@ -150,11 +139,20 @@ public sealed class GetResultsCommandHandler(
         }
         
         var totalCount = await query.CountAsync(cancellationToken);
-        
+
         var items = await query
             .OrderBy(x => x.FirstOperationDate)
             .Skip(request.Offset)
             .Take(request.Limit)
+            .Select(x => new ResultDto(
+                FileName: x.UploadedFile.FileName,
+                DateDeltaSeconds: x.DateDeltaSeconds,
+                FirstOperationDate: x.FirstOperationDate,
+                AverageExecutionTime: x.AverageExecutionTime,
+                AverageValue: x.AverageValue,
+                MedianValue: x.MedianValue,
+                MaxValue: x.MaxValue,
+                MinValue: x.MinValue))
             .ToListAsync(cancellationToken);
 
         var response = new PagedResponse(
