@@ -10,7 +10,7 @@ namespace TimeSeries.Features.Files;
 
 [ApiController]
 [Route("files")]
-public class GetResults(ISender sender, CancellationToken cancellationToken) : ApiControllerBase
+public class GetResults(ISender sender) : ApiControllerBase
 {
     [HttpGet("results")]
     public async Task<IActionResult> GetResult(
@@ -22,7 +22,8 @@ public class GetResults(ISender sender, CancellationToken cancellationToken) : A
         [FromQuery] double? averageExecutionTimeFrom,
         [FromQuery] double? averageExecutionTimeTo,
         [FromQuery] int offset = 0,
-        [FromQuery] int limit = 50)
+        [FromQuery] int limit = 50,
+        CancellationToken cancellationToken = default)
     {
         if ((averageValueFrom is not null && averageValueTo is not null) 
             && (averageValueFrom > averageValueTo))

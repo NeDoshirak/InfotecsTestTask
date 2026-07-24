@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries", "TimeSeries.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries.Domain", "..\TimeSeries.Domain\TimeSeries.Domain.csproj", "{0313CDF6-A109-48EC-BDE6-A787CFF86639}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries.IntegrationTests", "..\..\tests\TimeSeries.IntegrationTests\TimeSeries.IntegrationTests.csproj", "{73574F60-7E9C-49D8-A7DC-A228D8FD0401}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeries.UnitTests", "..\..\tests\TimeSeries.UnitTests\TimeSeries.UnitTests.csproj", "{0A1DCB48-F516-489E-A1F3-3840ABE48E64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{0313CDF6-A109-48EC-BDE6-A787CFF86639}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0313CDF6-A109-48EC-BDE6-A787CFF86639}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0313CDF6-A109-48EC-BDE6-A787CFF86639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73574F60-7E9C-49D8-A7DC-A228D8FD0401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73574F60-7E9C-49D8-A7DC-A228D8FD0401}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73574F60-7E9C-49D8-A7DC-A228D8FD0401}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73574F60-7E9C-49D8-A7DC-A228D8FD0401}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A1DCB48-F516-489E-A1F3-3840ABE48E64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A1DCB48-F516-489E-A1F3-3840ABE48E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A1DCB48-F516-489E-A1F3-3840ABE48E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A1DCB48-F516-489E-A1F3-3840ABE48E64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
